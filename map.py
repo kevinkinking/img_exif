@@ -11,7 +11,7 @@ def re_geo_coding(gps_info):
         'radius': 5000
     }
     try:
-        res_json = requests.post(url, params=params, timeout=3).json()
+        res_json = requests.post(url, params=params, timeout=2).json()
     except:
         return 402, None, None, None
     if res_json['status'] == '1':
@@ -26,9 +26,11 @@ def re_geo_coding(gps_info):
 
 if __name__ == "__main__":
     code, res_dic, img = exif.get_attr_img_from_url('ios.jpg')
+    print code
     if code == 201:
         gps_info = res_dic['GPSInfo']
         code, country, province, city = re_geo_coding(gps_info)
+        print code
         if code == 202:
             print country
             print province
