@@ -42,21 +42,23 @@ def get_attr_img_from_url(img_url):
     exif = get_exif(img)
     res_dic = {}
     if exif.has_key('GPSInfo'):
-        res_dic['GPSInfo'] = exif['GPSInfo']
+        gps_info = exif['GPSInfo']
+        longi = str(gps_info[2][0][0]) + '.' + str(gps_info[2][1][0])
+        latitu = str(gps_info[4][0][0]) + '.' + str(gps_info[4][1][0])
+        res_dic['GPSInfo'] = (longi, latitu)
     if exif.has_key('DateTime'):
         res_dic['DateTime'] = exif['DateTime']
     return 201, res_dic, img_cv
 
 if __name__ == '__main__':
-    code, res_dic, img = get_attr_img_from_url('nono.jpg')
-    print res_dic
+    code, res_dic, img = get_attr_img_from_url('xiaomi.jpg')
     if code != 201:
         print code
     else:
         print res_dic['GPSInfo']
         print res_dic['DateTime']
-        cv2.imshow('show', img)
-        cv2.waitKey(0)
+        # cv2.imshow('show', img)
+        # cv2.waitKey(0)
     # resp = urllib.urlopen('test.jpg')
     # img_bytes = np.asarray(bytearray(resp.read()), dtype = 'uint8')
     # exif = get_exif_from_bytes(img_bytes)
