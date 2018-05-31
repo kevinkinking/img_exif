@@ -31,6 +31,7 @@ if __name__ == "__main__":
         gps_info = res_dic['GPSInfo']
         code, country, province, city = re_geo_coding(gps_info)
         print code
+        print res_dic['DateTime']
         if code == 202:
             print country
             print province
