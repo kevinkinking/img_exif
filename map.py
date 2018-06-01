@@ -25,7 +25,7 @@ def re_geo_coding(gps_info):
         return 202, country, province, city
 
 if __name__ == "__main__":
-    code, res_dic, img = exif.get_attr_img_from_url('ios.jpg')
+    code, res_dic, img = exif.get_attr_img_from_url('http://pic09.babytreeimg.com/2018/0425/FsePbf1XfJ2ZzjG4uL9t6p4gqp7n')
     print code
     if code == 201:
         gps_info = res_dic['GPSInfo']

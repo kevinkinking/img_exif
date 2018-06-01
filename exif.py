@@ -43,15 +43,16 @@ def get_attr_img_from_url(img_url):
     res_dic = {}
     if exif.has_key('GPSInfo'):
         gps_info = exif['GPSInfo']
-        longi = str(gps_info[2][0][0]) + '.' + str(gps_info[2][1][0])
-        latitu = str(gps_info[4][0][0]) + '.' + str(gps_info[4][1][0])
-        res_dic['GPSInfo'] = (longi, latitu)
+        if gps_info.has_key(2) and gps_info.has_key(4):
+            longi = str(gps_info[2][0][0]) + '.' + str(gps_info[2][1][0])
+            latitu = str(gps_info[4][0][0]) + '.' + str(gps_info[4][1][0])
+            res_dic['GPSInfo'] = (longi, latitu)
     if exif.has_key('DateTime'):
         res_dic['DateTime'] = exif['DateTime']
     return 201, res_dic, img_cv
 
 if __name__ == '__main__':
-    code, res_dic, img = get_attr_img_from_url('xiaomi.jpg')
+    code, res_dic, img = get_attr_img_from_url('http://pic09.babytreeimg.com/2018/0425/FsePbf1XfJ2ZzjG4uL9t6p4gqp7n')
     if code != 201:
         print code
     else:
